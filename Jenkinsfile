@@ -7,8 +7,17 @@ pipeline {
       }
     }
     stage('Build') {
-      steps {
-        bat 'MSBuild.exe  Sitefinity/SitefinityWebApp.sln'
+      parallel {
+        stage('Build') {
+          steps {
+            bat 'MSBuild.exe  Sitefinity/SitefinityWebApp.sln'
+          }
+        }
+        stage('print') {
+          steps {
+            echo 'Hello'
+          }
+        }
       }
     }
   }
